@@ -1,0 +1,35 @@
+html {
+        background-color: #a683e3;
+
+        min-height: 1000px;
+        
+      }
+      body {
+        font-size: 33px;
+        text-align: center;
+      }
+      button {
+        font-size: 33px;
+
+        border-radius: 10px;
+      }
+      button:hover {
+        background-color: #ffd6ff;
+      }
+      .show {
+        height:fit-content;
+        width: fit-content;
+        margin: 100px 500px;
+        padding: 20px;
+        background-color: #edede9;
+        border-radius: 5px;
+      }
+
+/* Additional styles for project requirements */
+.container {
+  margin: 20px;
+}
+
+button {
+  margin: 10px;
+}

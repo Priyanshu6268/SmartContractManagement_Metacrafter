@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"
+    ></script>
+    
+  </head>
+  <body>
+    <div class="show">
+      <button onclick="connectMetamask()">Connect your metamask</button> <br />
+      <p id="accountArea"></p>
+      <button onclick="connectContract()">Connect your contract</button> <br />
+      <p id="contractArea"></p>
+
+      <button onclick="read()">Get your Balance</button> <br />
+      <p id="numberArea"></p>
+      <button onclick="yourViews()">My personal view</button> <br />
+      <p id="messageArea"></p>
+    </div>
+
+    <script>
+      let account;
+      const connectMetamask = async () => {
+        if (window.ethereum !== "undefined") {
+          const accounts = await ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          account = accounts[0];
+          document.getElementById("accountArea").innerHTML = account;
+        }
+      };
+
+
+      const connectContract = async () => {
+        const ABI = [
+          {
+            inputs: [],
+            name: "message",
+            outputs: [
+              {
+                internalType: "string",
+                name: "",
+                type: "string",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+          },
+          {
+            inputs: [],
+            name: "Message",
+            outputs: [
+              {
+                internalType: "string",
+                name: "",
+                type: "string",
+              },
+            ],
+            stateMutability: "pure",
+            type: "function",
+          },
+          {
+            inputs: [],
+            name: "number",
+            outputs: [
+              {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+          },
+          {
+            inputs: [],
+            name: "Number",
+            outputs: [
+              {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+              },
+            ],
+            stateMutability: "pure",
+            type: "function",
+          },
+        ];
+        const Address = "0x456C43b02a4C9EFbc58F8269eBD36f85F0F48e12";
+        window.web3 = await new Web3(window.ethereum);
+        window.contract = await new window.web3.eth.Contract(ABI, Address);
+        document.getElementById("contractArea").innerHTML =
+          "connected to smart contract";
+      };
+
+      const read = async () => {
+        const data = await window.contract.methods.Balance().call();
+        document.getElementById(
+          "numberArea"
+        ).innerHTML = `Contract Balance: ${data}`;
+      };
+      const yourViews = async () => {
+        const message = await window.contract.methods.View().call();
+        document.getElementById("messageArea").innerHTML = message;
+      };
+    </script>
+  </body>
+</html>
+
+  <!-- Additional HTML elements for project requirements -->
+  <div class="container">
+    <h1>Smart Contract </h1>
+    <button id="getGreetingBtn">Greeting</button>
+    <input type="text" id="setGreetingInput" placeholder="Enter new greeting">
+    <button id="setGreetingBtn">Set Greeting</button>
+    <button id="incrementNumberBtn">Incrementing Number</button>
+  </div>
+
+  <script>
+    // JavaScript to interact with smart contract
+    document.getElementById("getGreetingBtn").addEventListener("click", function() {
+      // Call function to get greeting from smart contract
+    });
+
+    document.getElementById("setGreetingBtn").addEventListener("click", function() {
+      const newGreeting = document.getElementById("setGreetingInput").value;
+      // Call function to set new greeting in smart contract
+    });
+
+    document.getElementById("incrementNumberBtn").addEventListener("click", function() {
+      // Call function to increment number in smart contract
+    });
+  </script>
